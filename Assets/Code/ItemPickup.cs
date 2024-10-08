@@ -26,7 +26,11 @@ public class ItemPickup : MonoBehaviour
             Debug.LogError("Item is null!");
             return;
         }
+
+        Debug.Log($"Picking up item: {item.itemName}");
         inventory.AddItem(item);
-        Destroy(gameObject); // Destroy the pickup object after it's collected
+
+        // ????????????? object ??????????
+        gameObject.SetActive(false);
     }
 }

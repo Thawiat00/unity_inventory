@@ -12,11 +12,19 @@ public class InventorySystem : MonoBehaviour
     public delegate void OnInventoryChanged();
     public event OnInventoryChanged onInventoryChanged;
 
- 
+
 
 
     public void AddItem(Item item)
     {
+        if (item == null)
+        {
+            Debug.LogError("Cannot add null item to inventory!");
+            return; // ???????????????????????? null
+        }
+
+        Debug.Log($"Adding item: {item.itemName}");
+
         if (items.Count < maxItems)
         {
             items.Add(item);
@@ -28,6 +36,7 @@ public class InventorySystem : MonoBehaviour
             Debug.Log("Inventory is full!");
         }
     }
+
 
     public void RemoveItem(Item item)
     {

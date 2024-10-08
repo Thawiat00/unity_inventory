@@ -13,6 +13,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        if (inventory == null)
+        {
+            Debug.LogError("InventorySystem is not assigned in the inspector!");
+            return;
+        }
+
         inventory.onInventoryChanged += UpdateInventoryUI;
         inventoryPanel.SetActive(false);
     }
@@ -35,6 +41,12 @@ public class UIManager : MonoBehaviour
 
         foreach (var item in inventory.items)
         {
+            if (item == null)
+            {
+                Debug.LogError("Item is null. Skipping this item.");
+                continue; // ???????????????????
+            }
+
             GameObject slot = Instantiate(itemSlotPrefab, itemsParent);
             Image icon = slot.transform.Find("Icon").GetComponent<Image>();
             icon.sprite = item.icon;
